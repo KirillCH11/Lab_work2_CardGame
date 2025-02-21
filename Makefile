@@ -1,24 +1,27 @@
-CXX := g++
-CXXFLAGS := -Wall -std=c++17
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++17
 
-SRC := main.cpp
-TEST_SRC := tests/test.cpp
+SRCS = main.cpp
+OBJS = $(SRCS:.cpp=.o)
 
-EXEC := CardGame
-TEST_EXEC := TestCardGame
+TEST_SRCS = tests/test.cpp
+TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 
-all: $(EXEC) $(TEST_EXEC)
+TARGET = CardGame
+TEST_TARGET = TestCardGame
 
-$(EXEC): $(SRC)
-    $(CXX) $(CXXFLAGS) -o $@ $^
+all: $(TARGET) $(TEST_TARGET)
 
-$(TEST_EXEC): $(TEST_SRC)
-    $(CXX) $(CXXFLAGS) -o $@ $^
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-test: $(TEST_EXEC)
-    ./$(TEST_EXEC)
+$(TEST_TARGET): $(TEST_OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-    rm -f $(EXEC) $(TEST_EXEC)
+	rm -f $(OBJS) $(TEST_OBJS) $(TARGET) $(TEST_TARGET)
 
-.PHONY: all test clean
+.PHONY: clean
