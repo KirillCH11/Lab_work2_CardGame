@@ -1,12 +1,16 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
 
+GTEST_LIBS = -lgtest -lgtest_main -pthread
 
 GAME_SRCS = game.cpp main.cpp
+TEST_SRCS = test_game.cpp
 
 GAME_OBJS = $(GAME_SRCS:.cpp=.o)
+TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 
 GAME_EXE = MyAwesomeGame
+TEST_EXE = MyGameTests
 
 all: $(GAME_EXE) $(TEST_EXE)
 
@@ -24,4 +28,4 @@ clean:
 	rm -f $(GAME_EXE)
 	rm -f $(TEST_EXE)
 
-.PHONY: clean al
+.PHONY: clean all

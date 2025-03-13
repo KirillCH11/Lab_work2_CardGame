@@ -8,7 +8,7 @@ Lab work 2 - Paths of Destiny is a text-based RPG game with elements of choice a
 
 ## Build
 
-### Demo application
+### Demo application and tests
 
 <par> make </par>
 
@@ -17,5 +17,9 @@ Lab work 2 - Paths of Destiny is a text-based RPG game with elements of choice a
 ### Demo application
 
 <par> ./MyAwesomeGame </par>
+
+### Demo tests suite
+
+<par> ./MyGameTests </par>
 
 
