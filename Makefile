@@ -1,27 +1,25 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra
+CXXFLAGS = -std=c++17 -Wall -Wextra -Werror -Wpedantic -Iinclude
 
+SRC_DIR = src
+OBJ_DIR = obj
 
-GAME_SRCS = game.cpp main.cpp
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+TARGET = MyAwesomeGame
 
-GAME_OBJS = $(GAME_SRCS:.cpp=.o)
+all: $(TARGET)
 
-GAME_EXE = MyAwesomeGame
+$(TARGET): $(OBJS)
+	$(CXX) $(OBJS) -o $(TARGET)
 
-all: $(GAME_EXE) $(TEST_EXE)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(GAME_EXE): $(GAME_OBJS) game.h
-	$(CXX) $(CXXFLAGS) -o $@ $(GAME_OBJS)
-
-$(TEST_EXE): game.o $(TEST_OBJS) game.h
-	$(CXX) $(CXXFLAGS) -o $@ game.o $(TEST_OBJS) $(GTEST_LIBS)
-
-%.o: %.cpp game.h
-	$(CXX) $(CXXFLAGS) -c $<
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -f *.o
-	rm -f $(GAME_EXE)
-	rm -f $(TEST_EXE)
+	rm -rf $(OBJ_DIR)/*.o $(TARGET)
 
-.PHONY: clean al
+.PHONY: all clean
