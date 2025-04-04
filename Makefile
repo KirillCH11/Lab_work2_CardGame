@@ -1,50 +1,39 @@
-PROJECT = GameProject
+CXX = g++
+AR = ar
+CXXFLAGS = -std=c++17 -Wall -Wextra -Iinclude -g
+ARFLAGS = rcs
+
+PROJECT = MyAwesomeGame
 LIBPROJECT = lib$(PROJECT).a
 TESTPROJECT = test-$(PROJECT)
 
-CXX = g++
-A = ar
-AFLAGS = rcs
-CXXFLAGS = -Iinclude -std=c++17 -Wall -Werror -Wpedantic -g -fPIC
+GAME_SRCS = $(filter-out src/main.cpp, $(wildcard src/*.cpp))
+GAME_OBJS = $(GAME_SRCS:.cpp=.o)
 
-LDXXFLAGS = $(CXXFLAGS) -Lbuild -l:$(LIBPROJECT)
-LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
+TEST_SRCS = test_game.cpp
+TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 
-SRC_DIR = src
-BUILD_DIR = build
+.PHONY: all clean cleanall test
 
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
-OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
-TEST_SRC = test.game.cpp
-TEST_OBJ = $(BUILD_DIR)/test.game.o
+all: $(PROJECT) $(TESTPROJECT)
 
-.PHONY: all test clean cleanall
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-all: $(PROJECT)
+$(LIBPROJECT): $(GAME_OBJS)
+	$(AR) $(ARFLAGS) $@ $^
 
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+$(PROJECT): $(LIBPROJECT) src/main.o
+	$(CXX) $(CXXFLAGS) -o $@ src/main.cpp -L. -l:$(LIBPROJECT)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
-$(LIBPROJECT): $(OBJ)
-	$(A) $(AFLAGS) $(BUILD_DIR)/$@ $^
-
-$(PROJECT): $(LIBPROJECT)
-
-$(TEST_OBJ): $(TEST_SRC) | $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
-$(TESTPROJECT): $(LIBPROJECT) $(TEST_OBJ)
-	$(CXX) -o $(BUILD_DIR)/$@ $(TEST_OBJ) $(LDGTESTFLAGS)
-
-test: $(TESTPROJECT)
-	./$(BUILD_DIR)/$(TESTPROJECT)
+$(TESTPROJECT): $(LIBPROJECT) $(TEST_OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_OBJS) -L. -l:$(LIBPROJECT) -lgtest -lgtest_main -pthread
 
 clean:
-	rm -f $(BUILD_DIR)/*.o
+	rm -f src/*.o *.o
 
 cleanall: clean
-	rm -f $(BUILD_DIR)/$(LIBPROJECT)
-	rm -f $(BUILD_DIR)/$(TESTPROJECT)
+	rm -f $(PROJECT) $(TESTPROJECT) $(LIBPROJECT)
+
+test: $(TESTPROJECT)
+	./$(TESTPROJECT)

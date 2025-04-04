@@ -21,9 +21,9 @@ TEST(RarityTest, Downgrade) {
 }
 
 TEST(MainHeroTest, DefendMechanic) {
-    MainHero hero; // default: health=1, strength=5, defense=0
-    hero.defend(1); 
-    EXPECT_LE(hero.getHealth(), 0) << "Expected hero to drop to 0 or below with incoming damage=1.";
+    MainHero hero; // default: health=100, strength=10, defense=5
+    hero.defend(105); 
+    EXPECT_LE(hero.getHealth(), 0) << "Expected hero to drop to 0 or below with incoming damage=105.";
 }
 
 TEST(InventoryTest, AddItems) {

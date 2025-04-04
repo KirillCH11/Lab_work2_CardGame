@@ -26,4 +26,4 @@ jobs:
       run: make all
 
     - name: Run tests
-      run: ./MyGameTests
+      run: ./test-MyAwesomeGame
