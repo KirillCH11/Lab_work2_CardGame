@@ -1,11 +1,32 @@
-Testing game paths:
-	1) Make sure that each path provides unique challenges and an appropriate ending.
-Testing the combat system and inventory:
-	1) Checking the correctness of the dropout of various types of items.
-	2) Check the improvement and deterioration of equipment after a mini-game with a wizard.
-Testing endings:
-	1) Checking the implementation of each ending based on the chosen path and the player's actions.
-	2) Game Integrity Testing:
-	3) Checking for smooth scene changes, correct display of player actions, and improved interactivity.
-User Interface Testing:
-	1) Testing the intuitiveness and accessibility of the interface for players of all levels.
+# The Path of Destiny Test Plan
+
+## Objective
+
+Ensure all functional and non-functional requirements are met to deliver a high-quality gaming experience.
+
+## Test Environment
+
+- **Platforms:** Linux
+- **Tools:** C++ testing framework (Google Test) and manual testing.
+
+## Test Cases
+
+- **Functional Testing:**
+  - Character creation inputs.
+  - Combat mechanics accuracy.
+  - Quest triggering and resolution.
+
+- **Non-Functional Testing:**
+  - Response times for actions.
+  - Memory consumption tests.
+  - Save state accuracy checks.
+
+## User Acceptance Testing (UAT)
+
+- Conduct UAT with target user group.
+- Collect feedback on usability and experience.
+
+## Regression Testing
+
+- Perform regression tests after major updates.
+- Ensure no disruption to existing functionality.

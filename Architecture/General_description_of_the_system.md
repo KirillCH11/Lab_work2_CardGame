@@ -1,5 +1,3 @@
-### 1. General System Description
-
 # The Path of Destiny System Overview
 
 ## System Overview

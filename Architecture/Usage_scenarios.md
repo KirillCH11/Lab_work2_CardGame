@@ -1,14 +1,36 @@
-The beginning of the game:
-	1) The player chooses a path ("The Path of Malice", "The Path of Virtue", "The Path of Power").
-	2) Gets the background and starts the journey.
-Challenges and rewards:
-	1) The player passes the first challenge, opens the chest.
-	2) Repeats on the second and third tests.
-	3) Randomly gets different types of equipment.
-Encounter with the Wizard:
-	1) The player decides whether to enter the game with the wizard.
-	2) The player rolls the dice for three rounds against the magician.
-	3) Depending on the result, the equipment improves or worsens.
-Final Battle:
-	1) The player arrives at the castle.
-	2) Depending on the chosen path, different endings unfold after the battle with the duke.
+# The Path of Destiny Usage Scenarios
+
+## Scenario 1: Starting a New Game
+
+**Preconditions:** Game is launched successfully.
+
+**Main Flow:**
+1. Main menu options: "New Game", "Load Game", "Exit".
+2. Player selects "New Game".
+3. Character creation: name and attributes.
+4. Game initiation with story segment.
+
+**Postconditions:** Character initialized in game world.
+
+## Scenario 2: Engaging in Combat
+
+**Preconditions:** Encounter with an enemy.
+
+**Main Flow:**
+1. Switch to combat mode.
+2. Options: "Attack", "Defend", "Use Item", "Flee".
+3. Action resolution via stats and dice roll.
+4. Iterates until combat concludes.
+
+**Postconditions:** Combat outcome processed.
+
+## Scenario 3: Saving the Game
+
+**Preconditions:** In-game menu access.
+
+**Main Flow:**
+1. Menu access and "Save Game" selection.
+2. Game state stored in a save file.
+3. Confirmation of successful save.
+
+**Postconditions:** Save file created for current state.
