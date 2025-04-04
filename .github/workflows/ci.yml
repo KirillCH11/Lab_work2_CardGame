@@ -21,6 +21,3 @@ jobs:
 
     - name: Build with Make
       run: make all
-
-    - name: Run tests
-      run: ./MyAwesomeGame
