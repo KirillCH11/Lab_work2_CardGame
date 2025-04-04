@@ -1,6 +1,5 @@
 ### 1. General System Description
 
-```markdown
 # The Path of Destiny System Overview
 
 ## System Overview
@@ -18,4 +17,4 @@ The architecture follows a modular, object-oriented design ensuring scalability 
 - **Build System:** GNU Make
 - **Platforms:** Linux
 - **Libraries:** Standard C++17 libraries
-```
+
