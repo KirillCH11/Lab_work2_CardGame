@@ -1,11 +1,11 @@
 ### 1. General System Description
 
 ```markdown
-# MyAwesomeGame System Overview
+# The Path of Destiny System Overview
 
 ## System Overview
 
-MyAwesomeGame is an immersive text-based role-playing game designed to engage players in a rich narrative with strategic combat and character progression. Players assume the role of a protagonist navigating a world full of challenges, adversaries, and quests.
+The Path of Destiny is an immersive text-based role-playing game designed to engage players in a rich narrative with strategic combat and character progression. Players assume the role of a protagonist navigating a world full of challenges, adversaries, and quests.
 
 ## Architectural Style
 
@@ -18,3 +18,4 @@ The architecture follows a modular, object-oriented design ensuring scalability 
 - **Build System:** GNU Make
 - **Platforms:** Linux
 - **Libraries:** Standard C++17 libraries
+```
