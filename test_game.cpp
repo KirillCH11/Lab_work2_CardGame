@@ -2,8 +2,10 @@
 	Lab_work_2
 */
 
-#include "game.h"
 #include <gtest/gtest.h>
+#include "Rarity.h"
+#include "MainHero.h"  
+#include "Inventory.h"  
 
 
 TEST(RarityTest, Upgrade) {
@@ -18,20 +20,17 @@ TEST(RarityTest, Downgrade) {
     EXPECT_EQ(downgradeRarity(Rarity::U), Rarity::U);
 }
 
-
 TEST(MainHeroTest, DefendMechanic) {
     MainHero hero; // default: health=1, strength=5, defense=0
     hero.defend(1); 
     EXPECT_LE(hero.getHealth(), 0) << "Expected hero to drop to 0 or below with incoming damage=1.";
 }
 
-
 TEST(InventoryTest, AddItems) {
     MainHero hero;
     auto w = std::make_shared<Weapon>("TestSword", Rarity::U, 5);
     hero.addToInventory(w);
     
-    // Check console output for presence of "TestSword"
     testing::internal::CaptureStdout();
     hero.showInventory();
     std::string output = testing::internal::GetCapturedStdout();

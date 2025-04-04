@@ -2,11 +2,10 @@
 	Lab_work_2
 */
 
-#include "game.h"
-
+#include "GameEngine.h"
 
 int main() {
     GameEngine engine;
     engine.run();
     return 0;
-};
+}
