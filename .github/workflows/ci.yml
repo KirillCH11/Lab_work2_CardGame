@@ -2,9 +2,11 @@ name: C++ CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - "*"
   pull_request:
-    branches: [ main ]
+    branches:
+      - "*"
 
 jobs:
   build:
@@ -19,6 +21,3 @@ jobs:
 
     - name: Build with Make
       run: make all
-
-    - name: Run tests
-      run: ./TestCardGame

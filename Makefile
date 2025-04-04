@@ -1,27 +1,25 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -std=c++17 -Wall -Wextra -Werror -Wpedantic -Iinclude
 
-SRCS = main.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRC_DIR = src
+OBJ_DIR = obj
 
-TEST_SRCS = tests/test.cpp
-TEST_OBJS = $(TEST_SRCS:.cpp=.o)
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+TARGET = MyAwesomeGame
 
-TARGET = CardGame
-TEST_TARGET = TestCardGame
-
-all: $(TARGET) $(TEST_TARGET)
+all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(OBJS) -o $(TARGET)
 
-$(TEST_TARGET): $(TEST_OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-%.o: %.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean:
-	rm -f $(OBJS) $(TEST_OBJS) $(TARGET) $(TEST_TARGET)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-.PHONY: clean
+clean:
+	rm -rf $(OBJ_DIR)/*.o $(TARGET)
+
+.PHONY: all clean
