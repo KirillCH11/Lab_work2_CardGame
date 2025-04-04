@@ -1,1 +1,20 @@
-The system is an adventure game with elements of a role-playing game (RPG), where the player controls the hero and makes choices at different stages that affect the ending. The player is immersed in a world where they can follow different paths, interact with characters, fight and collect equipment. In the end, the player will face the final clash that will determine the fate of the hero.
+### 1. General System Description
+
+```markdown
+# MyAwesomeGame System Overview
+
+## System Overview
+
+MyAwesomeGame is an immersive text-based role-playing game designed to engage players in a rich narrative with strategic combat and character progression. Players assume the role of a protagonist navigating a world full of challenges, adversaries, and quests.
+
+## Architectural Style
+
+The architecture follows a modular, object-oriented design ensuring scalability and maintainability. It employs a layered architecture pattern that separates the user interface, game logic, and data management.
+
+## Technology Stack
+
+- **Language:** C++
+- **Compiler:** G++ (GNU Compiler Collection)
+- **Build System:** GNU Make
+- **Platforms:** Linux
+- **Libraries:** Standard C++17 libraries
