@@ -21,4 +21,9 @@ public:
     void processRound();
     void end();
     int heroRollDice();
+    
+    bool isGameActive() const { return isActive; }
+    int getHeroWins() const { return heroWins; }
+    int getWizardWins() const { return wizardWins; }
+    int getRounds() const { return rounds; }
 };
