@@ -6,13 +6,20 @@
 #include <iostream>
 #include <limits>
 
-bool BattleMechanics::battle(MainHero &hero, Duke &duke) {
+bool BattleMechanics::battle(MainHero &hero, Duke &duke, bool autoMode) {
     std::cout << "\n--- Final battle with the Duke! ---\n";
     int timeCounter = 0;
     while (duke.getHealth() > 0 && hero.getHealth() > 0) {
-        std::cout << "(Hero turn: 'a' to attack / 'd' to defend) > ";
+        if (!autoMode) {
+            std::cout << "(Hero turn: 'a' to attack / 'd' to defend) > ";
+        }
+        
         char action;
-        std::cin >> action;
+        if (autoMode) {
+            action = 'a';
+        } else {
+            std::cin >> action;
+        }
         if (action == 'a' || action == 'A') {
             int dmg = hero.attack();
             duke.defend(dmg);

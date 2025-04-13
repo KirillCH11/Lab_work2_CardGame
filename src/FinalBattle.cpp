@@ -7,7 +7,7 @@
 
 void FinalBattle::startFinal(MainHero &hero) {
     Duke duke;
-    bool result = BattleMechanics::battle(hero, duke);
+    bool result = BattleMechanics::battle(hero, duke, false);
     if (result) {
         int path = hero.getChosenPath();
         if (path == 1) {

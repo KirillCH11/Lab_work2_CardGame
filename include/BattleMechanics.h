@@ -8,5 +8,5 @@
 
 class BattleMechanics {
 public:
-    static bool battle(MainHero &hero, Duke &duke);
+    static bool battle(MainHero &hero, Duke &duke, bool autoMode = false);
 };

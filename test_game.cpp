@@ -243,7 +243,7 @@ TEST(BattleMechanicsTest, BattleOutcome) {
     hero.setDefense(100);
     
     // Duke normal stats
-    bool result = BattleMechanics::battle(hero, duke);
+    bool result = BattleMechanics::battle(hero, duke, true);
     EXPECT_TRUE(result);
 }
 
