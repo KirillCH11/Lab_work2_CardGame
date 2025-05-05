@@ -10,20 +10,37 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     
-    - name: Install build tools
-      run: sudo apt-get install -y build-essential
-
-    - name: Install Google Test
-      run: sudo apt-get install -y libgtest-dev && cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv lib/*.a /usr/lib
-
-    - name: Build with Make
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libgtest-dev cmake
+        
+    - name: Build Google Test
+      run: |
+        cd /usr/src/gtest
+        sudo cmake .
+        sudo make
+        sudo mv lib/*.a /usr/lib
+        
+    - name: Build game
       run: make all
-
+      
     - name: Run tests
-      run: ./test-MyAwesomeGame
+      run: |
+        ./test-MyAwesomeGame --gtest_output=xml:test_results.xml
+        if [ $? -ne 0 ]; then
+          echo "=== TEST FAILURE OUTPUT ==="
+          ./test-MyAwesomeGame --gtest_filter=* --gtest_color=yes
+          exit 1
+        fi
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: test-results
+        path: test_results.xml

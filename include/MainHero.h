@@ -9,10 +9,12 @@
 #include "Weapon.h"
 #include "Armor.h"
 #include "Helmet.h"
+#include "Achievements.h"
 
 class MainHero : public BaseCharacter {
 private:
     Inventory inventory;
+    Achievements achievements;
     std::shared_ptr<Weapon> equippedWeapon;
     std::shared_ptr<Armor> equippedArmor;
     std::shared_ptr<Helmet> equippedHelmet;
@@ -34,4 +36,6 @@ public:
     void showInventory();
     void upgradeAllEquipment();
     void degradeAllEquipment();
+    Achievements& getAchievements() { return achievements; }
+    const Achievements& getAchievements() const { return achievements; }
 };

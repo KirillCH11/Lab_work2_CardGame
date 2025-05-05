@@ -4,13 +4,18 @@
 
 #pragma once
 #include "BaseCharacter.h"
+#include "MainHero.h"
+
+class DiceGame; 
 
 class Wizard : public BaseCharacter {
 public:
     Wizard();
-    virtual ~Wizard(){}
+    virtual ~Wizard() {}
+    
     int attack() override;
     void defend(int incomingDamage) override;
     void start_game();
     int roll_dice();
+    void offerDiceGame(MainHero& hero);
 };

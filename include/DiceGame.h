@@ -3,8 +3,9 @@
 */
 
 #pragma once
-#include "Wizard.h"
 #include "MainHero.h"
+
+class Wizard; 
 
 class DiceGame {
 private:
@@ -21,7 +22,6 @@ public:
     void processRound();
     void end();
     int heroRollDice();
-    
     bool isGameActive() const { return isActive; }
     int getHeroWins() const { return heroWins; }
     int getWizardWins() const { return wizardWins; }

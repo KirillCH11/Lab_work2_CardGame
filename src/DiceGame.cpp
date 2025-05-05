@@ -3,6 +3,7 @@
 */
 
 #include "DiceGame.h"
+#include "Wizard.h"
 #include <iostream>
 #include <limits>
 #include <ctime>
