@@ -1,27 +1,39 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+AR = ar
+CXXFLAGS = -std=c++17 -Wall -Wextra -Iinclude -g
+ARFLAGS = rcs
 
-SRCS = main.cpp
-OBJS = $(SRCS:.cpp=.o)
+PROJECT = MyAwesomeGame
+LIBPROJECT = lib$(PROJECT).a
+TESTPROJECT = test-$(PROJECT)
 
-TEST_SRCS = tests/test.cpp
+GAME_SRCS = $(filter-out src/main.cpp, $(wildcard src/*.cpp))
+GAME_OBJS = $(GAME_SRCS:.cpp=.o)
+
+TEST_SRCS = test_game.cpp
 TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 
-TARGET = CardGame
-TEST_TARGET = TestCardGame
+.PHONY: all clean cleanall test
 
-all: $(TARGET) $(TEST_TARGET)
-
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-$(TEST_TARGET): $(TEST_OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+all: $(PROJECT) $(TESTPROJECT)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean:
-	rm -f $(OBJS) $(TEST_OBJS) $(TARGET) $(TEST_TARGET)
+$(LIBPROJECT): $(GAME_OBJS)
+	$(AR) $(ARFLAGS) $@ $^
 
-.PHONY: clean
+$(PROJECT): $(LIBPROJECT) src/main.o
+	$(CXX) $(CXXFLAGS) -o $@ src/main.cpp -L. -l:$(LIBPROJECT)
+
+$(TESTPROJECT): $(LIBPROJECT) $(TEST_OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(TEST_OBJS) -L. -l:$(LIBPROJECT) -lgtest -lgtest_main -pthread
+
+clean:
+	rm -f src/*.o *.o
+
+cleanall: clean
+	rm -f $(PROJECT) $(TESTPROJECT) $(LIBPROJECT)
+
+test: $(TESTPROJECT)
+	./$(TESTPROJECT)
